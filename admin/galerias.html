@@ -71,16 +71,19 @@
 
           <div class="section-label" style="margin-top:24px;"><span class="eyebrow">FOTOS DO ENSAIO</span></div>
           <div class="form-grid">
-            <div class="field full" style="display:flex; gap:8px; align-items:flex-end;">
-              <div style="flex:1;">
-                <label>Adicionar foto (cole o link da imagem)</label>
-                <input type="text" id="fNewPhotoUrl" placeholder="https://...">
-              </div>
-              <button type="button" class="btn small secondary" id="addPhotoBtn">+ Adicionar</button>
+            <div class="field full">
+              <label>Adicionar fotos (cole um ou vários links, um por linha)</label>
+              <textarea id="fNewPhotoUrls" rows="4" placeholder="https://...
+https://...
+https://..." style="width:100%; padding:13px 14px; border:1px solid var(--line); border-radius:8px; font-size:.92rem; background:var(--paper); color:var(--ink); font-family:'JetBrains Mono',monospace; resize:vertical;"></textarea>
+            </div>
+            <div class="field full">
+              <button type="button" class="btn small secondary" id="addPhotoBtn">+ Adicionar fotos</button>
             </div>
           </div>
           <p style="font-size:.8rem; color:var(--ink-soft); margin:8px 0 0;">
-            Toque nas fotos abaixo para marcar quais pertencem a este ensaio. Fotos adicionadas ficam
+            Cole quantos links quiser, um em cada linha, e toque em "Adicionar fotos" uma vez só. Depois,
+            toque nas fotos abaixo para marcar quais pertencem a este ensaio. Fotos adicionadas ficam
             disponíveis para reutilizar em outras galerias também.
           </p>
           <div class="selection-frames" id="photoLibraryGrid" style="margin-top:12px;"></div>
@@ -202,14 +205,20 @@
   }
 
   document.getElementById('addPhotoBtn').addEventListener('click', () => {
-    const input = document.getElementById('fNewPhotoUrl');
-    const url = input.value.trim();
-    if (!url) { showAdminToast('Cole o link da foto antes de adicionar'); return; }
-    const photo = PhotoLibrary.add(url);
-    currentFotoIds.add(photo.id);
-    input.value = '';
+    const textarea = document.getElementById('fNewPhotoUrls');
+    const linhas = textarea.value.split('\n').map(l => l.trim()).filter(Boolean);
+    if (!linhas.length) { showAdminToast('Cole ao menos um link antes de adicionar'); return; }
+
+    let adicionadas = 0;
+    linhas.forEach(url => {
+      const photo = PhotoLibrary.add(url);
+      currentFotoIds.add(photo.id);
+      adicionadas++;
+    });
+
+    textarea.value = '';
     renderPhotoGrid();
-    showAdminToast('Foto adicionada');
+    showAdminToast(`${adicionadas} foto${adicionadas > 1 ? 's' : ''} adicionada${adicionadas > 1 ? 's' : ''}`);
   });
 
   function openForm(id) {

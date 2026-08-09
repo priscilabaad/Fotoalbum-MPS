@@ -141,17 +141,22 @@ A forma recomendada é direto no painel administrativo, pelo celular ou
 computador — sem precisar mexer em nenhum arquivo:
 
 1. Vá em `admin/galerias.html` → crie ou edite a galeria da cliente.
-2. Na seção **"Fotos do ensaio"**, cole o link de uma imagem no campo
-   e toque em **"+ Adicionar"**.
-3. A foto aparece na grade abaixo — toque nela para marcar/desmarcar se
-   ela pertence a este ensaio (fotos ficam com uma borda vinho quando
-   marcadas).
-4. Repita para todas as fotos do ensaio e clique em **Salvar galeria**.
+2. Na seção **"Fotos do ensaio"**, cole um ou vários links de imagem no
+   campo de texto (um por linha) e toque em **"+ Adicionar fotos"**.
+3. Todas as fotos coladas aparecem já marcadas na grade abaixo (borda
+   vinho). Se alguma não pertencer a este ensaio específico, toque nela
+   para desmarcar.
+4. Clique em **Salvar galeria**.
 
-Cada foto precisa de um **link direto de imagem** — por exemplo, de um
+Cada link precisa ser um **link direto de imagem** — por exemplo, de um
 álbum público do Google Fotos, uma pasta do Google Drive com link
 compartilhável, ou outro serviço de imagens. Fotos adicionadas ficam
 disponíveis para reutilizar em outras galerias também, caso precise.
+
+> O site ainda não consegue importar um álbum inteiro automaticamente
+> (isso exigiria a integração real com a API do Google Drive, descrita
+> mais abaixo) — por enquanto, é preciso ter o link de cada foto em mãos
+> e colar todos de uma vez nessa caixa de texto.
 
 ### Alternativa avançada: editar direto no código
 
